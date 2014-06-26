@@ -1,8 +1,44 @@
-//Updates the menu according to the current page url
+//Simple code that shows which page we are currently viewwing base of the anchor's url.
 
 
-var pageValues = ["whats-new", "organize", "view", "edit", "share"];
-var defaultValue = "overview";
+var pageValues = [] //will hold the value of all the links
+
+
+//Get The main wrapper to trigger the code
+var theMenuWrapper = document.getElementById("generateMenu").getElementsByTagName("a");
+
+/****************/
+// Second Engine
+/****************/
+// We use the links to create dynamically id for the parents, stores the data and then ask the second Engine to add the styles. 
+
+for(var u=0; u< theMenuWrapper.length; u++ ){
+
+    //We take the last value of the url and copy it into a temporary value
+    var tempClassNamer = theMenuWrapper[u].getAttribute("href").split("/");
+  
+    
+    //We put the current pop in a temporary variable    
+    var currentPop = tempClassNamer.pop(); 
+    
+    //We check if current pop is empty if its the case we pop again
+    if(currentPop==""){
+        currentPop = tempClassNamer.pop(); 
+    }
+    
+    //We push the value in a table that will call later tohelp us to identify the links.
+    pageValues.push(currentPop);
+    
+    //We assign this value as an id to the parent of the <A>; the <LI>
+    this.theMenuWrapper[u].parentNode.id = currentPop;
+
+}
+
+/****************/
+// Second Engine
+/****************/
+// We look up for a match arrcording to the values pushed in pageValues. 
+// We apply a style upon match then exit the loop
     
 //We loop though each elm
 for (var i=0; i < pageValues.length; i++){
@@ -11,37 +47,19 @@ for (var i=0; i < pageValues.length; i++){
     if(window.location.href.indexOf(pageValues[i]) > -1) {
 
         //We get the element with the same class name
-        var theSelected = document.getElementsByClassName(pageValues[i]);
+        var theSelected = document.getElementById(pageValues[i]);
 
         //We add a new class to the parent
-        theSelected[0].className += " activeLink";
+         theSelected.className  = "activeLink";
+    
 
         //If we found what we want we leave the loop
         break;
  
-    }else{
-
-        //We check if we are done looping
-        if(i >= pageValues.length-1){
-
-           //If we dint find what we are looking for we presume that we are on the default page 
-           var theSelected =   document.getElementsByClassName(defaultValue);//We use the default value
-           theSelected[0].className += " activeLink";
-            
-        }//Ends the if 
-
-      
-    }//ends the else
+    }
 
 
 }//End  the looping
 
 
 
-
-
-/* if(window.location.href.indexOf("aaaaa") > -1) {
-       alert("your url contains what you are looking for");
-    }else{
-//alert("it does not contain anythang");
-}*/
