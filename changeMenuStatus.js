@@ -5,7 +5,7 @@ var pageValues = [] //will hold the value of all the links
 
 
 //Get The main wrapper to trigger the code
-var theMenuWrapper = document.getElementById("generateMenu").getElementsByTagName("a");
+var theMenuWrapper = document.getElementById("thisIsAMenu").getElementsByTagName("a");
 
 /****************/
 // Second Engine
